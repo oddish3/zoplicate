@@ -20,6 +20,7 @@ import {
 export function patchGetSearchObject(
   refreshDuplicateStats: (libraryID: number, duplicatesObj: any, searchResultIDs: number[]) => Promise<void>,
 ): Disposer {
+  return patchMethod(
     Zotero.Duplicates.prototype,
     "getSearchObject",
     (original) =>
