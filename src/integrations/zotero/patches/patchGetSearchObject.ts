@@ -6,6 +6,7 @@ import {
   setDuplicateSearchObj,
   getDuplicateSets,
   setDuplicateSets,
+  markDuplicateSearchDirty,
 } from "../../../app/state";
 
 /**
@@ -16,8 +17,9 @@ import {
  *   injected from the composition root to avoid cross-layer imports.
  * Returns a disposer that restores the original method.
  */
-export function patchGetSearchObject(refreshDuplicateStats: RefreshDuplicateStats) {
-  return patchMethod(
+export function patchGetSearchObject(
+  refreshDuplicateStats: (libraryID: number, duplicatesObj: any, searchResultIDs: number[]) => Promise<void>,
+): Disposer {
     Zotero.Duplicates.prototype,
     "getSearchObject",
     (original) =>
