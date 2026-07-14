@@ -23,8 +23,8 @@ export function patchGetSearchObject(
   return patchMethod(
     Zotero.Duplicates.prototype,
     "getSearchObject",
-    (original) =>
-      async function (this: Zotero.Duplicates) {
+    (original: any) =>
+      async function (this: any) {
         ztoolkit.log("Get Search Object is called.");
         const libraryID = this._libraryID;
 
